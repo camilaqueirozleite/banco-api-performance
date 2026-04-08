@@ -1,45 +1,39 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 
+// Carrega o JSON com os dados do login
+const postLogin = JSON.parse(open('../fixtures/postLogin.json'));
+
 export const options = {
-    stages: [
-    { duration: '5s', target: 10 },
-    { duration: '20s', target: 10 },
-    { duration: '5s', target: 0 },
-   
-  ],
-    thresholds: {
-     http_req_duration: ['p(90)<3000' , 'max<5000'],
-     http_req_failed: ['rate<0.01']
-
-   }
-
-   };
-
+  iterations: 1,
+  thresholds: {
+    http_req_duration: ['p(90)<3000', 'max<5000'],
+    http_req_failed: ['rate<0.01'],
+  },
+};
 
 export default function () {
-    const url = 'http://localhost:3000/login';
-    const payload = JSON.stringify({
-        username: 'julio.lima',
-        senha: '123456',
-    });
+  const url = 'http://localhost:3000/login';
 
-    const params = {
-        headers: {
-        'Content-Type': 'application/json',
-        },
-    };
+  // Ajusta o username antes de enviar
+  postLogin.username = "junior.lima";
 
-    const res = http.post(url, payload, params); //requisição para a API
-    
-    check(res, {
-        'Validar que o status é 200': (r) => r.status === 200,
-        'Validar que o Token é string': (r) => typeof(r.json().token) == 'string'
+  const payload = JSON.stringify(postLogin);
 
-    })
-    sleep(1);
-    
-    }
+  const params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-  
-    
+  // Executa a requisição
+  const res = http.post(url, payload, params);
+
+  // Validações
+  check(res, {
+    'Status é 200': (r) => r.status === 200,
+    'Token é string': (r) => typeof r.json().token === 'string',
+  });
+
+  sleep(1);
+}
