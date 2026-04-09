@@ -16,7 +16,7 @@ export default function () {
   const url = 'http://localhost:3000/login';
 
   // Ajusta o username antes de enviar
-  postLogin.username = "junior.lima";
+  postLogin.username = "julio.lima";
 
   const payload = JSON.stringify(postLogin);
 
@@ -28,6 +28,8 @@ export default function () {
 
   // Executa a requisição
   const res = http.post(url, payload, params);
+  console.log("STATUS:", res.status);
+  console.log("BODY:", res.body);
 
   // Validações
   check(res, {
