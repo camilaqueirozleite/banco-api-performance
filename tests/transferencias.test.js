@@ -1,12 +1,6 @@
-const postLogin = {
-    username: "julio.lima",
-    password: "123456"
-};
-
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { token } from '../helpers/autenticacao.js';
-cao.js
+import { obterToken } from '../helpers/autenticacao.js';
 
 export const options = {
     iterations: 1,
@@ -17,26 +11,22 @@ export const options = {
 };
 
 export default function () {
+    const token = obterToken();
+
     const url = 'http://localhost:3000/transferencias';
 
     const params = {
         headers: {
-            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
     };
 
-    const payload = JSON.stringify({
-        origem: "12345-6",
-        destino: "98765-4",
-        valor: 100,
-        descricao: "Transferência automática"
-    });
+        let res = http.post(url, payload, params);
 
-    const res = http.post(url, payload, params);
-
+   
     check(res, {
-        'Status é 201': (r) => r.status === 201,
+        'status é 201': (r) => r.status === 201,
     });
 
     sleep(1);
