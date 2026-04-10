@@ -1,0 +1,13 @@
+{
+  "name": "banco-api-performance",
+  "version": "1.0.0",
+  "description": "Projeto de testes de performance com k6",
+  "main": "index.js",
+  "scripts": {
+    "login": "k6 run tests/login.test.js",
+    "transferencias": "k6 run tests/transferencias.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
