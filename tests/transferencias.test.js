@@ -13,7 +13,7 @@ export const options = {
 export default function () {
     const token = obterToken();
 
-    const url = 'http://localhost:3000/transferencias';
+    const url = pegarBaseURL + '/transferencias';
 
     const params = {
         headers: {

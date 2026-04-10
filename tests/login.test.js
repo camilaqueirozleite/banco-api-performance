@@ -1,5 +1,6 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
+import { pegarBaseURL } from '../utils/variaveis';
 
 // Carrega o JSON com os dados do login
 const postLogin = JSON.parse(open('../fixtures/postLogin.json'));
@@ -13,10 +14,11 @@ export const options = {
 };
 
 export default function () {
-  const url = 'http://localhost:3000/login';
+  const url = pegarBaseURL + 'login';
 
   // Ajusta o username antes de enviar
   postLogin.username = "julio.lima";
+  postLogin.senha = "123456";
 
   const payload = JSON.stringify(postLogin);
 
