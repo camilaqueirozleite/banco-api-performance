@@ -36,6 +36,7 @@ banco-api-performance/
 ├── package.json            # Scripts e dependências
 ├── .gitignore
 └── README.md
+
 🎯 Objetivo de Cada Grupo de Arquivos
 config/
 Armazena configurações locais, como URLs e parâmetros de ambiente.
