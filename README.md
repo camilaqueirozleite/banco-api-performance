@@ -1,7 +1,9 @@
 📘 Testes de Performance com JavaScript e k6
-https://img.shields.io/badge/JavaScript-ES6%2B-F7DF1E?logo=javascript&logoColor=black
-https://img.shields.io/badge/k6-Performance%20Testing-7D64FF?logo=k6&logoColor=white
-https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?logo=githubactions&logoColor=white
+
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-F7DF1E?logo=javascript&logoColor=black)
+![k6](https://img.shields.io/badge/k6-Performance%20Testing-7D64FF?logo=k6&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?logo=githubactions&logoColor=white)
+
 
 🧩 Introdução
 Este repositório contém testes de performance desenvolvidos em JavaScript utilizando o k6, com o objetivo de validar a estabilidade, velocidade e resiliência da API do projeto Banco API sob diferentes níveis de carga.
