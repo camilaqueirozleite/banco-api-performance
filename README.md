@@ -19,8 +19,9 @@ Git / GitHub – Versionamento
 
 HTML Report – Exportação de relatórios visuais
 
-📁 Estrutura do Repositório
-bash
+## 📁 Estrutura do Repositório
+
+```bash
 banco-api-performance/
 │
 ├── config/                 # Configurações locais
