@@ -1,5 +1,8 @@
 {
-
-  "baseUrl": "http://localhost:3000"
-
+  "baseUrl": "http://localhost:3000",
+  "transfer": {
+    "contaOrigem": 1,
+    "contaDestino": 2,
+    "valor": 100
+  }
 }

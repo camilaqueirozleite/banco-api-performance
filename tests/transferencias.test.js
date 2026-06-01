@@ -1,33 +1,45 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { obterToken } from '../helpers/autenticacao.js';
+import { obterDadosTransferencia, pegarBaseURL } from '../utils/variaveis.js';
 
 export const options = {
-    iterations: 1,
-    thresholds: {
-        http_req_duration: ['p(90)<3000', 'max<5000'],
-        http_req_failed: ['rate<0.01'],
-    },
+  vus: Number(__ENV.VUS || 1),
+  iterations: Number(__ENV.ITERATIONS || 1),
+  thresholds: {
+    http_req_duration: ['p(95)<1500', 'max<4000'],
+    http_req_failed: ['rate<0.01'],
+    checks: ['rate>0.99']
+  }
 };
 
-export default function () {
-    const token = obterToken();
+export function setup() {
+  const token = obterToken();
 
-    const url = pegarBaseURL + '/transferencias';
+  return { token };
+}
 
-    const params = {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        },
-    };
+export default function (data) {
+  const url = `${pegarBaseURL()}/transferencias`;
+  const payload = JSON.stringify(obterDadosTransferencia());
 
-        let res = http.post(url, payload, params);
+  const params = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${data.token}`
+    }
+  };
 
-   
-    check(res, {
-        'status é 201': (r) => r.status === 201,
-    });
+  const res = http.post(url, payload, params);
 
-    sleep(1);
+  check(res, {
+    'status e 201': (response) => response.status === 201,
+    'mensagem de sucesso retornada': (response) => {
+      const message = response.json('message') || '';
+
+      return message.includes('sucesso');
+    }
+  });
+
+  sleep(1);
 }

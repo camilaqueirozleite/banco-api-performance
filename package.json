@@ -1,13 +1,23 @@
 {
   "name": "banco-api-performance",
   "version": "1.0.0",
-  "description": "Projeto de testes de performance com k6",
-  "main": "index.js",
+  "description": "Performance testing project for a banking API using JavaScript and k6.",
   "scripts": {
-    "login": "k6 run tests/login.test.js",
-    "transferencias": "k6 run tests/transferencias.test.js"
+    "test": "npm run test:login && npm run test:transfers",
+    "test:login": "k6 run tests/login.test.js",
+    "test:transfers": "k6 run tests/transferencias.test.js",
+    "test:summary": "npm run test:login:summary && npm run test:transfers:summary",
+    "test:login:summary": "k6 run --summary-export reports/login-summary.json tests/login.test.js",
+    "test:transfers:summary": "k6 run --summary-export reports/transfers-summary.json tests/transferencias.test.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "qa",
+    "performance-testing",
+    "k6",
+    "javascript",
+    "api-testing",
+    "banking-api"
+  ],
+  "author": "Camila Leite",
+  "license": "MIT"
 }
